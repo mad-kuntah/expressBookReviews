@@ -16,7 +16,24 @@ const authenticatedUser = (username,password)=>{ //returns boolean
 //only registered users can login
 regd_users.post("/login", (req,res) => {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  
+  const {username, password} = req.body 
+
+  let user = users.filter(user => user.username == username)
+
+  if (users.length > 0){
+    if (users[0].password === password){
+        return res.status(200).json({
+            data: jwt.sign({
+                username
+            }, "SomeWeirdSecret")
+        }) 
+    }
+  }
+
+  res.status(500).json({
+    message: 'Auth failed'
+  })
 });
 
 // Add a book review
