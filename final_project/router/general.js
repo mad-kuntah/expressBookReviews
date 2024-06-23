@@ -85,21 +85,52 @@ public_users.get('/review/:isbn',function (req, res) {
 });
 
 
-axios.get('https://madechanguta-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/')
-     .then(res => console.log(res.data))
-     .catch(err => console.log(err))
+public_users.get('/',async function (req, res) {
+    //Write your code here
+    let getResult = new Promise((resolve,reject) => {
+        resolve(books)})
+
+    result = await getResult()
+});
 
 
-axios.get('https://madechanguta-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/isbn/2')
-     .then(res => console.log(res.data))
-     .catch(err => console.log(err))    
-     
-axios.get('https://madechanguta-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/author/Unknown')
-     .then(res => console.log(res.data))
-     .catch(err => console.log(err))         
 
-axios.get('https://madechanguta-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/title/Pride%20and%Prejudice')
-     .then(res => console.log(res.data))
-     .catch(err => console.log(err))  
+public_users.get('/isbn/:isbn',async function (req, res) {
+    //Write your code here
+    let getResult = new Promise((resolve,reject) => {
+        resolve(books[req.params.isbn])})
+
+    result = await getResult()
+});
+
+
+public_users.get('/author/:author',async function (req, res) {
+    //Write your code here
+    let getResult = new Promise((resolve,reject) => {
+
+        let booksResult = Object.keys(books).map(key => {
+            if (books[key].author == req.params.author) return books[key]
+        })
+
+        resolve(booksResult)})
+
+    result = await getResult()
+});
+
+public_users.get('/title/:title',async function (req, res) {
+    //Write your code here
+    let getResult = new Promise((resolve,reject) => {
+
+        let booksResult = Object.keys(books).map(key => {
+            if (books[key].title == req.params.title) return books[key]
+        })
+
+        resolve(booksResult)})
+
+    result = await getResult()
+});
+  
+  
+
 
 module.exports.general = public_users;
