@@ -14,7 +14,8 @@ app.use("/customer/auth/*", function auth(req,res,next){
 
  let token = req.headers["authorization"];
 
-   if (jwt.verify(token)) {    
+   if (jwt.verify(token, "SomeWeirdSecret")) {   
+    req.body.username = token.username 
     next()
    }else{
     res.status(500).json({

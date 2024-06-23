@@ -84,4 +84,22 @@ public_users.get('/review/:isbn',function (req, res) {
   )
 });
 
+
+axios.get('https://madechanguta-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/')
+     .then(res => console.log(res.data))
+     .catch(err => console.log(err))
+
+
+axios.get('https://madechanguta-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/isbn/2')
+     .then(res => console.log(res.data))
+     .catch(err => console.log(err))    
+     
+axios.get('https://madechanguta-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/author/Unknown')
+     .then(res => console.log(res.data))
+     .catch(err => console.log(err))         
+
+axios.get('https://madechanguta-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/title/Pride%20and%Prejudice')
+     .then(res => console.log(res.data))
+     .catch(err => console.log(err))  
+
 module.exports.general = public_users;

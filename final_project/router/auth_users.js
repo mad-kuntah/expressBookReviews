@@ -21,7 +21,7 @@ regd_users.post("/login", (req,res) => {
 
   let user = users.filter(user => user.username == username)
 
-  if (users.length > 0){
+  if (user.length > 0){
     if (users[0].password === password){
         return res.status(200).json({
             data: jwt.sign({
@@ -39,7 +39,27 @@ regd_users.post("/login", (req,res) => {
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const {username, review} = req.body
+  let isbn = req.params.isbn
+
+  books[isbn].reviews[username] = review
+
+  return res.status(200).json({
+    message: "Review added",
+    data: books[isbn].reviews[username]
+  })
+});
+
+regd_users.delete("/auth/review/:isbn", (req, res) => {
+  //Write your code here
+  const {username} = req.body
+  let isbn = req.params.isbn
+
+  delete books[isbn].reviews[username]
+
+  return res.status(200).json({
+    message: "Review deleted",
+  })
 });
 
 module.exports.authenticated = regd_users;
